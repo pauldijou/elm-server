@@ -7,6 +7,7 @@ effect module Server where { subscription = ServerSub } exposing
   , Server
   , Replier
   , ServerImplementation
+  , Msg(..)
   , start
   , stop
   , reply
@@ -15,7 +16,7 @@ effect module Server where { subscription = ServerSub } exposing
 
 {-|
 
-@docs Method, Request, Response, Cookie, Header, Server, Replier, ServerImplementation, start, stop, reply, listen
+@docs Method, Request, Response, Cookie, Header, Server, Replier, ServerImplementation, Msg, start, stop, reply, listen
 
 -}
 

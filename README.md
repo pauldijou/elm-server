@@ -29,7 +29,9 @@ type alias Options = {
 create: Options -> Task Error Server.Server
 create options =
   { implementation = Native.YouCustomServer.create options
-  , requestDecoder = requestDecoder
+  , request =
+    { decoder = requestDecoder
+    }
   -- other stuff...
   }
 
