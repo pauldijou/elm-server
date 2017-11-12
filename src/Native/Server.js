@@ -7,19 +7,19 @@ var _pauldijou$elm_server$Native_Server = function () {
     return helpers.task.succeed();
   }
 
-  function setup(sta) {
-    settings.sendToApp = sta;
+  function setup(sts) {
+    settings.sendToSelf = sts;
     return helpers.task.succeed();
   }
 
-  function sendToApp(event) {
-    if (settings.sendToApp) {
-      helpers.task.rawSpawn(settings.sendToApp(event));
+  function sendToSelf(event) {
+    if (settings.sendToSelf) {
+      helpers.task.rawSpawn(settings.sendToSelf(event));
     }
   }
 
   function onRequest(replier, request) {
-    sendToApp(A2(settings.messages.requested, replier, request));
+    sendToSelf(A2(settings.messages.requested, replier, request));
   }
 
   function hasServer() {

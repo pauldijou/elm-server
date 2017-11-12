@@ -150,15 +150,18 @@ onEffects router subs state =
     if state.initialized
     then Task.succeed state
     else
-      Native.Server.setup (Platform.sendToApp router)
+      Native.Server.setup (Platform.sendToSelf router)
       |> Task.map (\_ -> { state | initialized = True })
   )
   |> Task.map (\s -> { s | subs = subs })
 
 
 onSelfMsg : Platform.Router msg Msg -> Msg -> State msg -> Task Never (State msg)
-onSelfMsg router selfMsg state =
-  Task.succeed state
+onSelfMsg router msg state =
+  state.subs
+  |> List.map (\(Listen tagger) -> Platform.sendToApp router (tagger msg))
+  |> Task.sequence
+  |> Task.map (\_ -> state)
 
 
 -- -----------------------------------------------------------------------------
