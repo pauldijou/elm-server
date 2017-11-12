@@ -35,7 +35,7 @@ var _pauldijou$elm_server$Native_Server = function () {
   }
 
   function getServer() {
-    return helpers.task.fromCallback((succeed, fail) {
+    return helpers.task.fromCallback((succeed, fail) => {
       if (hasServer()) {
         succeed(settings.server);
       } else {
