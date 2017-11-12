@@ -34,15 +34,13 @@ var _pauldijou$elm_server$Native_Server = function () {
     settings.server = undefined;
   }
 
-  function getServer() {
-    return helpers.task.fromCallback((succeed, fail) => {
-      if (hasServer()) {
-        succeed(settings.server);
-      } else {
-        fail(new Error('You didn\'t start any server or you have already stopped it.'));
-      }
-    });
-  }
+  const getServer = helpers.task.fromCallback((succeed, fail) => {
+    if (hasServer()) {
+      succeed(settings.server);
+    } else {
+      fail(new Error('You didn\'t start any server or you have already stopped it.'));
+    }
+  });
 
   function start(server) {
     return helpers.task.fromCallback((succeed, fail) => {
@@ -85,6 +83,7 @@ var _pauldijou$elm_server$Native_Server = function () {
     init: init,
     setup: setup,
     start: start,
-    stop: stop
+    stop: stop,
+    getServer: getServer
   }
 }()
