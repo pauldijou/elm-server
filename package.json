@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "deps": "elm-github-install",
+    "build": "elm-make ./src/Server.elm --output=./dist/Server.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "elm": "^0.18.0",
+    "elm-github-install": "^1.6.1"
+  }
+}

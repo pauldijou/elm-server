@@ -1,0 +1,38 @@
+{
+  "version": "0.1.0",
+  "summary": "Low level types and functions to create a server using Elm code",
+  "repository": "https://github.com/pauldijou/elm-server.git",
+  "license": "Apache2",
+  "source-directories": [
+    "src"
+  ],
+  "exposed-modules": [
+    "Server",
+    "Server.Method",
+    "Server.Request",
+    "Server.Response",
+    "Server.Cookie"
+  ],
+  "native-modules": true,
+  "dependencies": {
+    "elm-lang/core": "5.0.0 <= v < 6.0.0",
+    "pauldijou/elm-ordeal": "1.0.0 <= v < 2.0.0",
+    "pauldijou/elm-kernel-helpers": "1.0.0 <= v < 2.0.0",
+    "pauldijou/elm-error": "1.0.0 <= v < 2.0.0"
+  },
+  "dependency-sources": {
+    "pauldijou/elm-ordeal": {
+      "url": "https://github.com/pauldijou/elm-ordeal.git",
+      "ref": "3ff8395abaf6a5f124050472ad07809373e7a73f"
+    },
+    "pauldijou/elm-kernel-helpers": {
+      "url": "https://github.com/pauldijou/elm-kernel-helpers.git",
+      "ref": "6ea75aedfb77da2b995d54537a17649072957426"
+    },
+    "pauldijou/elm-error": {
+      "url": "https://github.com/pauldijou/elm-error.git",
+      "ref": "b72dc87c52ed27063f0910bac66f82d551e04ed5"
+    }
+  },
+  "elm-version": "0.18.0 <= v < 0.19.0"
+}
