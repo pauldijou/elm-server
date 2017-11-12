@@ -132,9 +132,7 @@ type alias State msg =
 
 init : Task Never (State msg)
 init =
-  Native.Server.init
-    { messages = { requested = Requested }
-    }
+  Native.Server.init { requested = Requested }
   |> Task.map (\_ -> { initialized = False, subs = [] })
 
 
