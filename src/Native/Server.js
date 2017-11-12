@@ -1,4 +1,4 @@
-var _nomalab$elm_hapi$Native_Hapi = function () {
+var _pauldijou$elm_server$Native_Server = function () {
   const helpers = _pauldijou$elm_kernel_helpers$Native_Kernel_Helpers;
   const settings = {};
 

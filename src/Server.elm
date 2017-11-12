@@ -31,6 +31,8 @@ import Server.Response
 import Server.Cookie
 import Server.Method
 
+import Native.Server
+
 {-|-}
 type alias Method = Server.Method.Method
 
