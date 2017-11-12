@@ -23,7 +23,7 @@ var _pauldijou$elm_server$Native_Server = function () {
   }
 
   function hasServer() {
-    return settings.server !== undefined
+    return settings.server !== undefined;
   }
 
   function assignServer(server) {
@@ -41,7 +41,7 @@ var _pauldijou$elm_server$Native_Server = function () {
       } else {
         fail(new Error('You didn\'t start any server or you have already stopped it.'));
       }
-    })
+    });
   }
 
   function start(server) {
@@ -55,8 +55,8 @@ var _pauldijou$elm_server$Native_Server = function () {
         assignServer(server);
         server.implementation.start({
           onRequest: onRequest
-        }).then(started => {
-          succeed(Object.assign(server, { implementation: started }));
+        }).then(() => {
+          succeed(server);
         }).catch(err => {
           removeServer();
           fail(err);
@@ -65,7 +65,7 @@ var _pauldijou$elm_server$Native_Server = function () {
         removeServer();
         fail(err);
       }
-    })
+    });
   }
 
   function stop(server) {
@@ -78,7 +78,7 @@ var _pauldijou$elm_server$Native_Server = function () {
       } catch (err) {
         fail(err);
       }
-    })
+    });
   }
 
   return {
