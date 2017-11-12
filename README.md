@@ -26,11 +26,11 @@ type alias Options = {
   -- You should put here any options needed to create a raw server
 }
 
-create: String -> Options -> Task Error Server.Server
-create id options =
-  { id = id
-  , implementation = Native.YouCustomServer.create options
+create: Options -> Task Error Server.Server
+create options =
+  { implementation = Native.YouCustomServer.create options
   , requestDecoder = requestDecoder
+  -- other stuff...
   }
 
 requestDecoder: Decoder Server.Request

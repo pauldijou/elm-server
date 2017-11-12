@@ -54,13 +54,17 @@ type Replier = Replier
 {-|-}
 type alias Server =
   { implementation: ServerImplementation
-  , requestDecoder: Decoder Request
-  , start: Replier -> Replier
-  , withStatusCode: Int -> Replier -> Replier
-  , withHeader: Header -> Replier -> Replier
-  , withCookie: Cookie -> Replier -> Replier
-  , withBody: String -> Replier -> Replier
-  , end: Replier -> Replier
+  , request:
+    { decoder: Decoder Request
+    }
+  , replier:
+    { init: Replier -> Replier
+    , withStatusCode: Int -> Replier -> Replier
+    , withHeader: Header -> Replier -> Replier
+    , withCookie: Cookie -> Replier -> Replier
+    , withBody: String -> Replier -> Replier
+    , send: Bool -> Replier -> Replier
+    }
   }
 
 {-|-}
@@ -80,22 +84,15 @@ reply: Replier -> Response -> Task Error Replier
 reply replier response =
   getServer
   |> Task.map (\server ->
-    -- The naming is not that good
-    -- We are not assigning a status code to the server itself,
-    -- we are using those util functions exposed from the server to reply
-    server.start replier
-    |> server.withStatusCode response.statusCode
-    |> foldOnReplier server.withHeader response.headers
-    |> foldOnReplier server.withCookie response.cookies
+    server.replier.init replier
+    |> server.replier.withStatusCode response.statusCode
+    |> foldOnReplier server.replier.withHeader response.headers
+    |> foldOnReplier server.replier.withCookie response.cookies
     |> (\rplr -> case response.body of
       Nothing -> rplr
-      Just body -> server.withBody body rplr
+      Just body -> server.replier.withBody body rplr
     )
-    |> (\rplr ->
-      if response.end
-      then server.end rplr
-      else rplr
-    )
+    |> server.replier.send response.end
   )
 
 
