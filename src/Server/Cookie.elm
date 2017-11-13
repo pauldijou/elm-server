@@ -42,6 +42,8 @@ type Expiration
 {-|-}
 type alias Cookie =
   { name: String
+  , value : String
+  , domain: Maybe String
   , expiration: Maybe Expiration
   , httpOnly: Bool
   , secure: Bool
@@ -51,9 +53,11 @@ type alias Cookie =
   }
 
 {-|-}
-init: String -> Cookie
-init name =
+init: String -> String -> Cookie
+init name value =
   { name = name
+  , value = value
+  , domain = Nothing
   , expiration = Just Session
   , httpOnly = True
   , secure = True
@@ -65,8 +69,18 @@ init name =
 {-|-}
 remove: String -> Cookie
 remove name =
-  init name
+  init name ""
   |> expiresIn 0
+
+{-|-}
+withDomain: String -> Cookie -> Cookie
+withDomain domain cookie =
+  { cookie | domain = Just domain }
+
+{-|-}
+withoutDomain: Cookie -> Cookie
+withoutDomain cookie =
+  { cookie | domain = Nothing }
 
 {-|-}
 expiresWithSession: Cookie -> Cookie
